@@ -11,18 +11,20 @@ body {
 
 span.code {
     font-family: "Consolas";
-    background-color: #def;
+    white-space: pre-wrap;
+    background-color: #7af4;
 }
 
 span.multiline {
     display: inline-block;
     background-color: #fff;
-    border: 2px solid #ccc;
+    border: 2px solid #888a;
     margin-top: 0.3em;
     margin-bottom: 0.3em;
     padding: 4px 1%;
 }
 
 span.comment {
-    color: #0a8;
+    color: #043a;
+    white-space: inherit;
 }
