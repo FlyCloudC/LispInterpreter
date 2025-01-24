@@ -9,10 +9,6 @@ body {
     }
 }
 
-div {
-    margin: 4px;
-}
-
 span.code {
     font-family: "Consolas";
     background-color: #def;
