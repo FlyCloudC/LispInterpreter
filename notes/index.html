@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scheme语言指南</title>
+    <link rel="stylesheet" href="note_style.css" />
+    <script src="rend.js"></script>
+</head>
+
+<body>
+    <h1>scheme语言指南</h1>
+    <h3>值和表达式</h3>
+    <p>
+    <ul>
+
+        <li><b>值</b>：数字、{#t}、{#f}</li>
+        <li><b>组合式</b>：由一对括号包围的多个表达式组成，其中每个子表达式用空格隔开。
+            例如：{(+ 2 3)}、{(> 2 1)}、{(fact a)}。</li>
+    </ul>
+
+    </p>
+    <h3>定义({define})</h3>
+    <p>
+    <ul>
+        <li>
+            {define}可以给一个<b>值</b>起名字，之后就可以使用名字表示它。<br />
+            语法为：{(define [name] [x])}。例如：<br />
+            {
+            (define pi 3.14) ; 给 3.14 起名为 pi，之后就能用 pi 代表 3.14
+            (* pi (* 10 10)) ; 计算半径为 10 的圆的面积，它相当于 (* 3.14 (* 10 10))
+            (define C (* 2 pi 10)) ; 计算半径为 10 的圆的周长，起名为 C
+            }
+        </li>
+        <li>
+            {define}也可以定义一个<b>过程</b>，之后就可以使用名字调用它。例如：<br />
+            {
+            (define (square x) (* x x))
+            (square 5) ; 相当于 (* 5 5)，得到 25
+            }
+        </li>
+    </ul>
+    </p>
+    <h3>组合式的化简</h3>
+    <p>
+        每个<b>组合式</b>都能化简成一个<b>值</b>。<br />
+        以下的每个用方括号括起来的部分，都代表一个表达式。例如，{[a]}代表一个表达式，{[b]}代表另一个表达式。
+    <ul>
+        <li>组合式以{if}开头，形如{(if [a] [b] [c])}：
+            <ul>
+                <li>如果{[a]}化简成{#t}，则{(if [a] [b] [c])}化简成{[b]}的值。</li>
+                <li>如果{[a]}化简成{#f}，则{(if [a] [b] [c])}化简成{[c]}的值。</li>
+            </ul>
+        <li>组合式以其它符号开头，形如{([f] [x1] [x2] ... [xn])}：
+            <ul>
+                <li>先分别求出{[x1]}、{[x2]}、...、{[xn]}的值，记为{[v1]}、{[v2]}、...、{[vn]}</li>
+                <li>如果{[f]}是语言自带的过程，例如+，-，*，/，则按照对应的规则计算。</li>
+                <li>如果{[f]}是用户定义的过程：
+                    <ul>
+                        <li>先获取{[f]}的定义，{[f]}的定义是{(define ([f] [a1] [a2] ... [an]) [body])}，其中{[body]}是一个表达式。
+                        </li>
+                        <li>将{[body]}中出现的{[a1]}、{[a2]}、...、{[an]}替换为{[v1]}、{[v2]}、...、{[vn]}，得到新的表达式{[body']}。
+                        </li>
+                        <li>{([f] [x1] [x2] ... [xn])}的值就是{[body']}的值。</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    </li>
+    </p>
+    <p>scheme语言自带的过程：</p>
+    <ul>
+        <li>{+}、{-}、{*}、{/}：数字的加减乘除运算。</li>
+        <li>{=}、{<}、{>}：数字的比较。如果成立，得到{#t}，否则得到{#f}。</li>
+    </ul>
+</body>
+
+</html>
