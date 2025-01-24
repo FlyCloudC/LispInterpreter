@@ -1,0 +1,10 @@
+hashtable
+重写parser，用自动机识别
+字符、字符串、向量
+命名let
+eqv? equal?
+
+script2里面是重构的
+
+2022.11.17
+算了。用typescript重构吧。js的类太难用了。
