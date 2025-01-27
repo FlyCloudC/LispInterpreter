@@ -1,29 +1,3 @@
-const MAX_TAIL_CALL_COUND = 100000;
-//-----------------------------------
-class LispError extends Error {
-  constructor(message, from) {
-    if (from) {
-      super(`Exception in ${from}: ${message}`);
-    } else {
-      super(`Exception: ${message}`);
-    }
-  }
-}
-class LispSyntaxError extends LispError {
-  constructor(exp, message = 'invalid syntax') {
-    function expand(e) {
-      if (e instanceof Array)
-        return `(${e.map(expand).join(' ')})`;
-      else
-        return e;
-    }
-    super(`${message} ${expand(exp)}`);
-    this.exp = exp;
-  }
-}
-class LispApplyError {
-  constructor(message) { this.message = message; }
-}
 //------------------------------------
 const LAST_ENV = Symbol('LAST_ENV');
 function bindVar(id, value, env) {
@@ -55,8 +29,6 @@ function evalLisp(exp, env, cc) {
   analyze(exp)(env, cc);
 }
 
-class LispAnalyzeError extends LispError { }
-class LispReadError extends Error { }
 function analyze(exp) {
   if (exp instanceof Array) {
     let head = exp[0];
@@ -291,7 +263,8 @@ const analyzeByHead = {
 
 function analyzeSequence(exps) {
   if (exps.length === 0)
-    throw new LispAnalyzeError('Empty sequence');
+    throw new LispSyntaxError(exps);
+
   let procs = exps.map(analyze);
   return procs.reverse().reduce((
     (pa, pb) =>
@@ -326,6 +299,9 @@ function getArguments(aprocs, env, cc) {
 
 function analyzeApplication(exp) {
   let [fproc, ...aprocs] = exp.map(analyze);
+  if (fproc === undefined)
+    throw new LispSyntaxError(exp);
+
   if (false && exp.isTail) {
     return (env, cc) => {
       fproc(env, f => {
