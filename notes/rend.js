@@ -1,8 +1,9 @@
+/**
+ * @param {string} code_or_ref_text
+ */
 function code_span(code_or_ref_text) {
     if (/\n/.test(code_or_ref_text)) {
-        console.error(code_or_ref_text)
-        return
-        throw new Error('Multiline code should use outer reference');
+        console.error('Multiline code should use outer reference', code_or_ref_text);
     }
 
     const span = document.createElement('span');
@@ -78,29 +79,26 @@ function replace_text_to_code_span(node) {
 }
 
 /**
- * @param {string} url 
+ * @param {} url 
  */
 async function fetch_code_example(url) {
     const response = await fetch(url);
     const text = await response.text();
-    const codes = text.split('---');
-    if (codes.length > 0 && codes[codes.length - 1].trim() === '') {
-        codes.pop();
-    }
-    const map = new Map(codes.map(title_and_code => {
-        title_and_code = title_and_code.trim();
-        // 找到第一个换行符
-        const index = title_and_code.indexOf('\n');
-        if (index === -1) {
-            throw new Error(`Invalid code block: ${title_and_code}`);
-        }
-        const title = title_and_code.slice(0, index);
-        const code = title_and_code.slice(index + 1);
-        return [title.trim(), code.trim()];
-    }));
-    return map;
+    const map = text.split('---')
+        .filter(s => s.trim() !== '')
+        .map(title_and_code => {
+            title_and_code = title_and_code.trim();
+            // 找到第一个换行符
+            const index = title_and_code.indexOf('\n');
+            if (index === -1) {
+                throw new Error(`Invalid code block: ${title_and_code}`);
+            }
+            const title = title_and_code.slice(0, index);
+            const code = title_and_code.slice(index + 1);
+            return [title.trim(), code.trim()];
+        });
+    return new Map(map);
 }
-
 
 /**
  * @param {Map<string, string>} code_map 
