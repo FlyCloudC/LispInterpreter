@@ -17,7 +17,7 @@ span.code {
 
 span.multiline {
     display: block;
-    width: max-content;
+    width: fit-content;
     background-color: #fff;
     border: 2px solid #888a;
     margin-top: 0.3em;
