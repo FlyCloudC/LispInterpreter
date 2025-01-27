@@ -1,4 +1,5 @@
 ﻿let sourceForm, outputForm;
+let consoleClearEachRun = true;
 
 window.onload = () => {
   [sourceForm, outputForm, errorForm, autorunButton, delayInput] =
@@ -17,7 +18,9 @@ window.onload = () => {
 }
 
 function run() {
-  console.clear();
+  if (consoleClearEachRun)
+    console.clear();
+
   let code = sourceForm.value;
   try {
     let mainExp = parse(code);
@@ -32,6 +35,7 @@ function run() {
       });
     }
     outputForm.value = output.join('\n');
+    outputForm.scrollTop = outputForm.scrollHeight;
     errorForm.value = null;
   }
   catch (err) {
@@ -82,9 +86,4 @@ function loadFile() {
     reader.readAsText(inputEle.files[0]);
   }
   inputEle.click();
-}
-
-function out(x) {
-  console.log(x);
-  return x;
 }

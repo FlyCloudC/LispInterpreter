@@ -4,14 +4,12 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  font-size: 24px;
+  font-size: 20px;
 }
 
-.row {
-  max-height: 90%;
-  padding: 4px;
+body {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .source-sec {
@@ -20,9 +18,23 @@ body {
   padding: 4px;
 }
 
+.source-sec textarea {
+  height: 90%;
+}
+
 .running-sec {
-  width: 25%;
+  width: 30%;
   padding: 4px;
+}
+
+textarea {
+  width: 95%;
+  margin: 4px 0;
+  padding: 4px 2px;
+  border: 2px solid #888a;
+  font-size: inherit;
+  font-family: "Consolas";
+  /* resize: none; */
 }
 
 .input-delay {
@@ -31,10 +43,7 @@ body {
 
 @media screen and (max-width: 500px) {
   body {
-    font-size: 16px;
-  }
-
-  .row {
+    font-size: 14px;
     flex-direction: column;
     max-height: fit-content;
     align-items: center;
@@ -44,39 +53,17 @@ body {
     width: 90%;
   }
 
-  .source-sec textarea {
-    height: 60%;
-  }
-
   .running-sec {
     width: 90%;
   }
 }
 
-textarea {
-  width: 95%;
-  margin: 10px 0;
-  padding: 4px 1%;
-  border: 1px solid;
-  border-radius: 4px;
-  box-shadow: 0 0 3px 0px #000f;
-  font-size: inherit;
-  font-family: "Consolas";
-  /* resize: none; */
-}
-
 button {
-  font-size: inherit;
-}
-
-.source-sec textarea {
-  height: 90%;
-}
-
-footer {
-  margin: 4px 2%;
+  display: inline;
+  padding: 0.1em 4px;
+  font-size: 0.8em;
 }
 
 div {
-  margin: 4px;
+  margin: 0 4px;
 }

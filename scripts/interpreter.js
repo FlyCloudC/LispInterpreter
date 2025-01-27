@@ -122,7 +122,7 @@ const analyzeByHead = {
   },
   'if': exp => {
     if (exp.length !== 4 && exp.length !== 3)
-      throw new LispAnalyzeError(exp);
+      throw new LispSyntaxError(exp);
 
     let pproc = analyze(exp[1]);
     exp[2].isTail = exp.isTail;

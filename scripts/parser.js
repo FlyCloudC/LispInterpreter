@@ -1,7 +1,7 @@
 class ParseError extends Error { }
 
 function parse(code) {
-  let strls = ` ${code}\n`
+  const strls = ` ${code}\n`
     .replace('\'()', 'nil') //临时补丁
     .replace(/;(.*?)\n/g, '') //去掉注释
     .replaceAll('(', ' ( ') //给括号两边加空格
@@ -10,11 +10,11 @@ function parse(code) {
     .trim()
     .split(' '); //按空格把c1分成数组
   if (strls.length === 1 && strls[0] === '')
-    strls = [];
+    return [];
 
-  let expStack = [[]];
+  const expStack = [[]];
   let top = 0;
-  for (let v of strls) {
+  for (const v of strls) {
     switch (v) {
       case '(':
         expStack[++top] = [];
