@@ -12,6 +12,13 @@ function parse(code) {
   if (strls.length === 1 && strls[0] === '')
     return [];
 
+  const lp = strls.filter(v => v === '(').length;
+  const rp = strls.filter(v => v === ')').length;
+  if (lp > rp)
+    throw new ParseError(`missing ${lp - rp} ')'`);
+  else if (rp > lp)
+    throw new ParseError(`there are ${rp - lp} more ')'`);
+
   const expStack = [[]];
   let top = 0;
   for (const v of strls) {
@@ -20,8 +27,6 @@ function parse(code) {
         expStack[++top] = [];
         break;
       case ')':
-        if (top === 0)
-          throw new ParseError(`unexpected ')'`);
         expStack[top - 1].push(expStack[top]);
         --top;
         break;
@@ -29,8 +34,6 @@ function parse(code) {
         expStack[top].push(v);
     }
   }
-  if (top !== 0)
-    throw new ParseError(`missing ${top} ')'`);
 
   return expStack[0];
 }
