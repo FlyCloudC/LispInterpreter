@@ -1,5 +1,5 @@
 function buildBasedEnv() {
-  const basedEnv = { nil: LispEmptyListObj };
+  const basedEnv = { null: LispEmptyListObj };
   [
     numberOperator,
     pairAndListOperator,
@@ -150,12 +150,12 @@ const numberOperator = [
 
 const pairAndListOperator = [
   new PrimitiveProcedure(
-    'cons',
+    'pair',
     arglen => arglen === 2,
     args => new LispPair(...args)
   ),
   new PrimitiveProcedure(
-    'car',
+    'left',
     arglen => arglen === 1,
     args => {
       let p = args[0];
@@ -164,7 +164,7 @@ const pairAndListOperator = [
     },
   ),
   new PrimitiveProcedure(
-    'cdr',
+    'right',
     arglen => arglen === 1,
     args => {
       let p = args[0];
@@ -173,7 +173,7 @@ const pairAndListOperator = [
     }
   ),
   new PrimitiveProcedure(
-    'set-car!',
+    'set-left!',
     arglen => arglen === 2,
     args => {
       let p = args[0];
@@ -183,7 +183,7 @@ const pairAndListOperator = [
     }
   ),
   new PrimitiveProcedure(
-    'set-cdr!',
+    'set-right!',
     arglen => arglen === 2,
     args => {
       let p = args[0];
