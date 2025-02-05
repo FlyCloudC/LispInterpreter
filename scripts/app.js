@@ -58,7 +58,8 @@ function saveFile() {
   const content = sourceForm.value;
   let defaultFilename = `${content}\n`
     .match(/.*(?=\n)/)?.[0]
-    ?.match(/(?<=;).*/)?.[0];
+    ?.match(/(?<=;).*/)?.[0]
+    ?.trim();
   if (defaultFilename)
     defaultFilename += '.scm';
   let filename = prompt('文件名', defaultFilename);
