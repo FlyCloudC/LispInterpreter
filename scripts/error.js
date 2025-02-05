@@ -21,9 +21,7 @@ class LispSyntaxError extends LispError {
     }
 }
 
-class LispApplyError extends LispError {
-    constructor(message) { this.message = message; }
-}
+class LispApplyError extends LispError { }
 
 
 // To be removed
