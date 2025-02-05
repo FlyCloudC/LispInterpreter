@@ -2,7 +2,6 @@ class ParseError extends Error { }
 
 function parse(code) {
   const strls = ` ${code}\n`
-    .replace('\'()', 'null') //临时补丁
     .replace(/;(.*?)\n/g, '') //去掉注释
     .replaceAll('(', ' ( ') //给括号两边加空格
     .replaceAll(')', ' ) ')

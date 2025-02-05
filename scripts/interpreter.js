@@ -47,14 +47,10 @@ function analyze(exp) {
     else if (exp === '#f')
       return (env, cc) => { cc(LispFalse); };
   }
-  if (exp[0] === '\'') { //空表 symbol
-    if (exp === '\'()')
-      return (env, cc) => { cc(LispEmptyListObj); };
-    else {
-      if (exp.length === 1)
-        throw new LispReadError('can\'t read \'');
-      return (env, cc) => { cc(new LispSymbol(exp.slice(1))); };
-    }
+  if (exp[0] === '\'') { //symbol
+    if (exp.length === 1)
+      throw new LispReadError('can\'t read \'');
+    return (env, cc) => { cc(new LispSymbol(exp.slice(1))); };
   }
   if (isIdentifier(exp)) //变量
     return (env, cc) => { cc(lookInEnv(exp, env)); };
