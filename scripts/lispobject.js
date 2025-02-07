@@ -52,6 +52,8 @@ class LispBoolean extends LispObject {
 }
 const LispTrue = new LispBoolean(true);
 const LispFalse = new LispBoolean(false);
+LispBoolean.of = (b) => b ? LispTrue : LispFalse;
+
 class LispHashtables extends LispObject { }
 class LispProceedure extends LispObject {
   constructor(name) { super(); this.name = name; }

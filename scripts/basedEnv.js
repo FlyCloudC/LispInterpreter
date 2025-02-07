@@ -346,7 +346,7 @@ const otherOpertator = [
     arglen => arglen === 2,
     args => {
       let [a, b] = args;
-      return new LispBoolean(
+      return LispBoolean.of(
         a.__proto__ === b.__proto__ && (
           a instanceof LispEmptyList ||
           (
@@ -372,52 +372,52 @@ const otherOpertator = [
   new PrimitiveProcedure(
     'boolean?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispBoolean)
+    args => LispBoolean.of(args[0] instanceof LispBoolean)
   ),
   new PrimitiveProcedure(
     'null?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispEmptyList)
+    args => LispBoolean.of(args[0] instanceof LispEmptyList)
   ),
   new PrimitiveProcedure(
     'pair?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispPair)
+    args => LispBoolean.of(args[0] instanceof LispPair)
   ),
   new PrimitiveProcedure(
     'number?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispNumber)
+    args => LispBoolean.of(args[0] instanceof LispNumber)
   ),
   new PrimitiveProcedure(
     'char?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispCharacter)
+    args => LispBoolean.of(args[0] instanceof LispCharacter)
   ),
   new PrimitiveProcedure(
     'string?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispString)
+    args => LispBoolean.of(args[0] instanceof LispString)
   ),
   new PrimitiveProcedure(
     'vector?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispVector)
+    args => LispBoolean.of(args[0] instanceof LispVector)
   ),
   new PrimitiveProcedure(
     'symbol?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispSymbol)
+    args => LispBoolean.of(args[0] instanceof LispSymbol)
   ),
   new PrimitiveProcedure(
     'procedure?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispProceedure)
+    args => LispBoolean.of(args[0] instanceof LispProceedure)
   ),
   new PrimitiveProcedure(
     'hashtable?',
     arglen => arglen === 1,
-    args => new LispBoolean(args[0] instanceof LispHashtables)
+    args => LispBoolean.of(args[0] instanceof LispHashtables)
   ),
   new PrimitiveProcedure(
     'error',
